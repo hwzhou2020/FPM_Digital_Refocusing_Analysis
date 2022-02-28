@@ -1,4 +1,5 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Modified by Haowen Zhou, hzhou7@caltech.edu
 % main file to implement Fourier Ptychography reconstruction algorithm
 % ref
 % Lei Tian, et.al, Biomedical Optics Express 5, 2376-2389 (2014).
@@ -20,8 +21,7 @@
 % 1) The sample ROI need to be a square region
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-clear;clc;
-close all;
+clear;clc; close all;
 %% Z scan
 zscan = 0:6;
 Oz = zeros(1024,1024,length(zscan),4);
@@ -33,8 +33,8 @@ for dfc = 1:2
 for iz = 1:length(zscan)
 %% Reconstruction library locates here
 addpath(['./FP_Func']);
-FilePath = 'E:\2021_FPM_Haowen\Data_08172021_238';
-DataName = ['\08172021_Siemens_df',num2str(zscan(iz)+2),'_20x_g']; % +2 Siemens 
+FilePath = '.\Data_08172021_238';  % Please modify the file path when using the code
+DataName = ['\08172021_Siemens_df',num2str(zscan(iz)+2),'_20x_g']; % +2 Siemens; the focal plane is at filename "2" place
 DataDir = [FilePath, DataName,'_preprocess.mat'];
 filename = DataDir;
 [filepath,name,ext] = fileparts(filename);
@@ -281,7 +281,7 @@ if case_correct == 1
 end
 %% display results
 I_kohler = sum(I_used,3);
-% figure;imshow(I_kohler,[]);title('Köhler illumination');
+% figure;imshow(I_kohler,[]);title('KÃ¶hler illumination');
 
 % figure;
 % subplot(221);
@@ -378,13 +378,3 @@ else
 end
 
 
-
-% if opts.EPRY == 0
-%     fn = [name,'_',num2str(Nused),'_drf',num2str(defocus*1e6),'_prop',num2str(defocus_post_correct*1e6),'.mat'];
-%     save([out_dir,'\',fn],'Oz','Pz','err_pc','Ns_cal','FPM_prop','lambda','defocus','defocus_post_correct');
-% elseif opts.EPRY == 1
-%     fn = [name,'_',num2str(Nused),'_drf',num2str(defocus*1e6),'_prop',num2str(defocus_post_correct*1e6),'_EPRY','.mat'];
-%     save([out_dir,'\',fn],'O','P','err_pc','Ns_cal','FPM_prop','lambda','defocus','defocus_post_correct');
-% else
-%     disp('ERROR: opts.EPRY not correct. Values should be 0 or 1.');
-% end
