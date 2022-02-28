@@ -1,0 +1,7 @@
+## Description of results
+
+ROI: Central part of reconstructed image
+Siemens: Reconstructed FPM results
+
+_a_b: a = defocus distance (in micron) +1 (e.g. a = 1 is in-focus; a = 2 is defocus distance of 1 micron).
+      b = refocusing method '1' in-iteration standard digital refocusing; '2' post-reconstruction digital refocusing; '3' a test method; '4' no defocus correction 
